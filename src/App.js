@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  return <Routes></Routes>;
+  return <div>app</div>;
 }
 
 export default App;
