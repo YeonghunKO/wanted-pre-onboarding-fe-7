@@ -30,7 +30,7 @@ function Auth() {
     }
 
     isLoading(true);
-    if (authType === 'signup') {
+    if (authType === 'signUp') {
       await api.signUp(email, password);
     } else {
       await api.signIn(email, password);
