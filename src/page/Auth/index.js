@@ -53,17 +53,17 @@ function Auth() {
   };
 
   const handleEmail = ({ target: { value } }) => {
-    setEmail(value);
+    setEmail(value.trim());
 
-    isValidateEmail(value) //
+    isValidateEmail(value.trim()) //
       ? setEmailError(false)
       : setEmailError(true);
   };
 
   const handlePassword = ({ target: { value } }) => {
-    setPassword(value);
+    setPassword(value.trim());
 
-    isValidatePassword(value)
+    isValidatePassword(value.trim())
       ? setPasswordError(false)
       : setPasswordError(true);
   };
