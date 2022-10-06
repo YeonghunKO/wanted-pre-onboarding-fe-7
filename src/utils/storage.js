@@ -1,2 +1,14 @@
-// App 에서 storage를 넘겨주면 안됨
-// 여기서 넘겨줘야 매번 갱신됨
+const getItem = (keyword, defaultValue = undefined) => {
+  const storedData = localStorage.getItem(keyword);
+  if (!storedData) {
+    return defaultValue;
+  }
+
+  return JSON.parse(storedData);
+};
+
+const setItem = (keyword, value) => {
+  localStorage.setItem(keyword, JSON.stringify(value));
+};
+
+export { getItem, setItem };

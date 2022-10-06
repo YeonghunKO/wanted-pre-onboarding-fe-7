@@ -1,10 +1,33 @@
-class Api {
+import { setItem } from './storage';
+
+type gerneralTodo = {
+  id: number;
+  todo: string;
+  isCompleted: boolean;
+  userId: number;
+};
+
+type updateTodo = {
+  todo: string;
+  isCompleted: boolean;
+};
+
+interface apiInterface {
+  signUp(email: string, password: string): void;
+  signIn(email: string, password: string): void;
+  createTodo(todo: string): Promise<gerneralTodo>;
+  getTodos(): Promise<gerneralTodo[]>;
+  updateTodo(todoId: number, body: updateTodo): Promise<gerneralTodo>;
+  deleteTodo(todoId: number): Promise<{ status: number }>;
+}
+
+class Api implements apiInterface {
   #END_POINT = '';
-  constructor(endPoint) {
+  constructor(endPoint: string) {
     this.#END_POINT = endPoint;
   }
 
-  async signUp(email, password) {
+  async signUp(email: string, password: string) {
     const res = await fetch(`${this.#END_POINT}/auth/signup`, {
       method: 'POST',
       headers: {
@@ -14,10 +37,10 @@ class Api {
     });
 
     const { access_token } = await res.json();
-    localStorage.setItem('token', access_token);
+    setItem('token', access_token);
   }
 
-  async signIn(email, password) {
+  async signIn(email: string, password: string) {
     const res = await fetch(`${this.#END_POINT}/auth/signin`, {
       method: 'POST',
       headers: {
@@ -27,10 +50,10 @@ class Api {
     });
 
     const { access_token } = await res.json();
-    localStorage.setItem('token', access_token);
+    setItem('token', access_token);
   }
 
-  async createTodo(todo) {
+  async createTodo(todo: string) {
     const res = await fetch(`${this.#END_POINT}/todos`, {
       method: 'POST',
       headers: {
@@ -42,19 +65,18 @@ class Api {
     return await res.json();
   }
 
-  async getTodos(todo) {
+  async getTodos() {
     const res = await fetch(`${this.#END_POINT}/todos`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ todo }),
     });
     return await res.json();
   }
 
-  async updateTodo(todoId, body) {
+  async updateTodo(todoId: number, body: updateTodo) {
     const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
       method: 'PUT',
       headers: {
@@ -66,7 +88,7 @@ class Api {
     return await res.json();
   }
 
-  async deleteTodo(todoId) {
+  async deleteTodo(todoId: number) {
     const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
       method: 'DELETE',
       headers: {
@@ -78,6 +100,6 @@ class Api {
   }
 }
 
-const api = Api('localhost:8000');
+const api = new Api('localhost:8000');
 
 export { api };

@@ -10,6 +10,8 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import styles from './Auth.module.css';
 
 import { useNavigate } from 'react-router-dom';
+import { api } from '../../utils/api';
+import { getItem } from '../../utils/storage';
 
 function Auth() {
   const [authType, setAuthType] = useState('signIn');
@@ -21,14 +23,16 @@ function Auth() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
     if (isEmailError || isPasswordError) {
       return;
     }
+
     isLoading(true);
-    localStorage.setItem('token', 'sdag');
-    navigate(ROUTES.TODOS, { replace: true });
+    await api.signUp(email, password);
+
+    navigate(ROUTES.TODOS);
     // console.log(password, email);
   };
 
@@ -61,7 +65,7 @@ function Auth() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (getItem('token')) {
       navigate(ROUTES.TODOS, { replace: true });
     }
   });
