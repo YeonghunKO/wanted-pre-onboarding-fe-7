@@ -11,4 +11,8 @@ const setItem = (keyword, value) => {
   localStorage.setItem(keyword, JSON.stringify(value));
 };
 
-export { getItem, setItem };
+const removeItem = keyword => {
+  localStorage.removeItem(keyword);
+};
+
+export { getItem, setItem, removeItem };
