@@ -1,4 +1,4 @@
-import { setItem } from './storage';
+import { getItem, setItem } from './storage';
 
 type gerneralTodo = {
   id: number;
@@ -28,78 +28,107 @@ class Api implements apiInterface {
   }
 
   async signUp(email: string, password: string) {
-    const res = await fetch(`${this.#END_POINT}/auth/signup`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${this.#END_POINT}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const { access_token } = await res.json();
-    setItem('token', access_token);
+      const { access_token } = await res.json();
+      setItem('token', access_token);
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async signIn(email: string, password: string) {
-    const res = await fetch(`${this.#END_POINT}/auth/signin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const res = await fetch(`${this.#END_POINT}/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const { access_token } = await res.json();
-    setItem('token', access_token);
+      const { access_token, message } = await res.json();
+
+      if (access_token) {
+        setItem('token', access_token);
+      } else {
+        throw new Error(message);
+      }
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async createTodo(todo: string) {
-    const res = await fetch(`${this.#END_POINT}/todos`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ todo }),
-    });
-    return await res.json();
+    try {
+      const res = await fetch(`${this.#END_POINT}/todos`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ todo }),
+      });
+      return await res.json();
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async getTodos() {
-    const res = await fetch(`${this.#END_POINT}/todos`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    return await res.json();
+    try {
+      const res = await fetch(`${this.#END_POINT}/todos`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return await res.json();
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async updateTodo(todoId: number, body: updateTodo) {
-    const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    });
-    return await res.json();
+    try {
+      const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+      return await res.json();
+    } catch (error) {
+      alert(error);
+    }
   }
 
   async deleteTodo(todoId: number) {
-    const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-        'Content-Type': 'application/json',
-      },
-    });
-    return await res.json();
+    try {
+      const res = await fetch(`${this.#END_POINT}/todos/${todoId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      return await res.json();
+    } catch (error) {
+      alert(error);
+    }
   }
 }
 
-const api = new Api('localhost:8000');
+const api = new Api('http://localhost:8000');
 
 export { api };
