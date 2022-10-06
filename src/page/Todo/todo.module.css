@@ -1,0 +1,18 @@
+.signOutBtn {
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  font-family: 'Indie Flower', cursive;
+  font-size: 1rem;
+  background-color: rgb(114, 41, 183);
+  cursor: pointer;
+}
+
+.signOutBtn:hover {
+  transition: all 0.1s linear;
+  background-color: rgb(92, 8, 171);
+}
