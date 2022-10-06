@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+.authType {
+  cursor: pointer;
+  color: rgb(22, 22, 221);
+}
+
+.todoTitle {
+  margin-top: 2rem;
+  font-family: 'Indie Flower', cursive;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 3rem;
+}
