@@ -8,8 +8,8 @@ type gerneralTodo = {
 };
 
 type updateTodo = {
-  todo: string;
-  isCompleted: boolean;
+  todo?: string;
+  isCompleted?: boolean;
 };
 
 interface apiInterface {
@@ -18,7 +18,7 @@ interface apiInterface {
   createTodo(todo: string): Promise<gerneralTodo>;
   getTodos(): Promise<gerneralTodo[]>;
   updateTodo(todoId: number, body: updateTodo): Promise<gerneralTodo>;
-  deleteTodo(todoId: number): Promise<{ status: number }>;
+  deleteTodo(todoId: number): void;
 }
 
 class Api implements apiInterface {
@@ -122,7 +122,9 @@ class Api implements apiInterface {
           'Content-Type': 'application/json',
         },
       });
-      return await res.json();
+      // console.log(res.json());
+
+      // return await res.json();
     } catch (error) {
       alert(error);
     }
