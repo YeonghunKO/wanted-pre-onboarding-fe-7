@@ -16,6 +16,7 @@ import { useContext, memo } from 'react';
 import { dispatchContext } from '../../context/Todo';
 
 import styles from '../TodoList/todo.module.css';
+import { api } from '../../utils/api';
 
 function Todo({ id, isCompleted, todo }) {
   const [isEdit, setIsEdit, resetIsEdit] = useToggleState(false);
@@ -25,8 +26,19 @@ function Todo({ id, isCompleted, todo }) {
 
   const dispatch = useContext(dispatchContext);
 
+  const handleCheck = () => {
+    dispatch({ type: 'TOGGLE', id });
+  };
+
   if (isEdit) {
-    return <EditTodoForm resetIsEdit={resetIsEdit} task={todo} id={id} />;
+    return (
+      <EditTodoForm
+        resetIsEdit={resetIsEdit}
+        isCompleted={isCompleted}
+        todo={todo}
+        id={id}
+      />
+    );
   } else {
     return (
       <li className={styles.itemContainer} key={id}>
@@ -37,14 +49,20 @@ function Todo({ id, isCompleted, todo }) {
           <Checkbox
             tabIndex={-1}
             checked={isCompleted}
-            onClick={() => dispatch({ type: 'TOGGLE', id })}
+            onClick={async () => {
+              dispatch({ type: 'TOGGLE', id });
+              api.updateTodo(id, { todo, isCompleted: !isCompleted });
+            }}
           />
           <span>{todo}</span>
         </div>
         <div>
           <IconButton
             className={styles.deleteBtn}
-            onClick={() => dispatch({ type: 'REMOVE', id })}
+            onClick={() => {
+              dispatch({ type: 'REMOVE', id });
+              api.deleteTodo(id);
+            }}
           >
             <DeleteIcon />
           </IconButton>

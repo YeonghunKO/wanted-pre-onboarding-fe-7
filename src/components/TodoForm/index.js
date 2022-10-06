@@ -4,16 +4,18 @@ import useInputState from '../../hooks/useInputState';
 
 import { useContext } from 'react';
 import { dispatchContext } from '../../context/Todo';
+import { api } from '../../utils/api';
 
 function TodoForm() {
   const [inputVal, setInputVal, reset] = useInputState('');
   const dispatch = useContext(dispatchContext);
   // console.log('TODOFORM RENDERING');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     // console.log(inputVal);
-    dispatch({ type: 'ADD', todo: inputVal });
+    const { userId, id } = await api.createTodo(inputVal);
+    dispatch({ type: 'ADD', id, todo: inputVal, userId });
     reset();
   };
 

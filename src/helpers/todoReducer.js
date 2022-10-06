@@ -6,7 +6,12 @@ const todoReducer = (state, action) => {
     case 'ADD':
       return [
         ...state,
-        { id: action.id, todo: action.todo, isCompleted: false },
+        {
+          id: action.id,
+          todo: action.todo,
+          isCompleted: false,
+          userId: action.userId,
+        },
       ];
     case 'TOGGLE':
       return state.map(task =>
