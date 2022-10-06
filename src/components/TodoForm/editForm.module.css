@@ -1,0 +1,14 @@
+.editFormContainer {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+.editForm {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.991);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  margin: 0.3rem;
+}

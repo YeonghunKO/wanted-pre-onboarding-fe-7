@@ -1,0 +1,24 @@
+.itemContainer {
+  width: 90%;
+  background-color: rgba(255, 255, 255, 0.991);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0.3rem;
+}
+
+.itemFront {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteBtn:hover {
+  transition: all 0.1s linear;
+  color: rgba(255, 0, 0, 0.671);
+}
+
+.editBtn:hover {
+  transition: all 0.1s linear;
+  color: rgba(255, 255, 0, 0.759);
+}
