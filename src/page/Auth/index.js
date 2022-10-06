@@ -30,7 +30,11 @@ function Auth() {
     }
 
     isLoading(true);
-    await api.signUp(email, password);
+    if (authType === 'signup') {
+      await api.signUp(email, password);
+    } else {
+      await api.signIn(email, password);
+    }
 
     navigate(ROUTES.TODOS);
     // console.log(password, email);
