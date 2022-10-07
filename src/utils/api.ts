@@ -131,6 +131,6 @@ class Api implements apiInterface {
   }
 }
 
-const api = new Api('http://localhost:8000');
+const api = new Api('https://pre-onboarding-selection-task.shop');
 
 export { api };
