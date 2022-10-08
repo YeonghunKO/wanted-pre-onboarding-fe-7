@@ -10,7 +10,6 @@ export default function TodoList() {
   const todos = useContext(todoContext);
 
   const dispatch = useContext(dispatchContext);
-  // const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     async function getTodo() {

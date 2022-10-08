@@ -122,9 +122,6 @@ class Api implements apiInterface {
           'Content-Type': 'application/json',
         },
       });
-      // console.log(res.json());
-
-      // return await res.json();
     } catch (error) {
       alert(error);
     }

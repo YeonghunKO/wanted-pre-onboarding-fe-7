@@ -37,7 +37,6 @@ function Auth() {
     }
 
     navigate(ROUTES.TODOS);
-    // console.log(password, email);
   };
 
   const isValidateEmail = email => {

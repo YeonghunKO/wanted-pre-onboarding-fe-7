@@ -30,8 +30,6 @@ function Todo() {
   return (
     <Paper
       style={{
-        // padding: 0,
-        // margin: 0,
         height: '100vh',
         backgroundColor: '#f3f2ef',
       }}
@@ -49,9 +47,7 @@ function Todo() {
             🔥FIRE TODOS🔥
           </Typography>
           <button
-            // variant="contained"
-            // color="secondary"
-            // endIcon={<LogoutIcon />}
+        
             className={styles.signOutBtn}
             onClick={signOut}
           >

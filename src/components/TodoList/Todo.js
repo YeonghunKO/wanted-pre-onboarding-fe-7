@@ -75,30 +75,5 @@ function Todo({ id, isCompleted, todo }) {
   }
 }
 
-{
-  /* <Checkbox
-          tabIndex={-1}
-          checked={isCompleted}
-          onClick={() => dispatch({ type: 'TOGGLE', id })}
-        />
-        <span
-          style={{ textDecoration: isCompleted ? 'line-through' : 'none' }}
-          key={id}
-        >
-          {todo}
-        </span>
-        <div>
-          <span
-            className={styles.deleteBtn}
-            aria-label="Delete"
-            onClick={() => dispatch({ type: 'REMOVE', id })}
-          >
-            <DeleteIcon />
-          </span>
-          <IconButton aria-label="Edit" onClick={handleEdit}>
-            <EditIcon />
-          </IconButton>
-        </div> */
-}
 
 export default memo(Todo);
