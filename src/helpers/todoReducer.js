@@ -1,5 +1,4 @@
 const todoReducer = (state, action) => {
-  console.log(state);
   switch (action.type) {
     case 'INIT':
       return [...action.initTodos];
